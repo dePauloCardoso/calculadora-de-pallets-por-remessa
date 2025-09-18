@@ -1,0 +1,10 @@
+-------- Projeto - Quantidade de pallets - Transferências --------
+
+Ideia:
+- Estimativa de cálculo de quantidade de volumes para saber a quantidade de pallets.
+
+Insumos:
+- Dados sobre os produtos:
+    - Quantidade pro caixa,
+    - Peso,
+    - Valor unitário,
