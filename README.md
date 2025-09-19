@@ -50,9 +50,30 @@ O arquivo CSV deve conter as seguintes colunas:
 
 ## 📈 Cálculos realizados
 
-1. **Volumes por item**: `ceil(quantidade_pedida / qtd_por_caixa)`
-2. **Total de volumes**: Soma de todos os volumes por item
-3. **Total de pallets**: `ceil(total_volumes / 48)`
+### Sistema de Caixas
+A aplicação utiliza 3 tipos de caixas baseados na quantidade do pedido:
+
+- **Caixa Padrão (01)**: Altura completa - usada quando quantidade > 50% da capacidade
+- **Caixa Quebra (02)**: 1/3 da altura - usada quando quantidade está entre 30% e 50% da capacidade  
+- **Caixa Quebra Menor (03)**: 1/5 da altura - usada quando quantidade < 30% da capacidade
+
+### Cálculos
+1. **Caixas cheias**: Quando quantidade ≥ capacidade da caixa
+2. **Caixa quebra**: Para o restante, baseado na porcentagem:
+   - > 50% da capacidade: Caixa Padrão (01)
+   - 30% - 50% da capacidade: Caixa Quebra (02)
+   - < 30% da capacidade: Caixa Quebra Menor (03)
+3. **Ocupação no pallet**: Cada tipo de caixa tem um fator de ocupação diferente
+4. **Total de pallets**: `ceil(ocupação_total / 48)`
+
+### Exemplo
+Pedido de 22 itens, caixa comporta 12:
+- 1ª caixa: 12 itens (cheia) = Caixa Padrão (01)
+- 2ª caixa: 10 itens (83%) = Caixa Padrão (01)
+
+### Equivalências
+- 1 pallet = 48 caixas padrão
+- 1 caixa padrão = 3 caixas quebra = 5 caixas quebra menor
 
 ## ⚠️ Observações
 
